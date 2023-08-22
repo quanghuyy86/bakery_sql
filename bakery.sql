@@ -1,98 +1,98 @@
 CREATE DATABASE bakery;
 
-CREATE TABLE bakery.tbl_Contact(
-ID int NOT NULL AUTO_INCREMENT,
-FullName varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-Email varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-Message varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-CteatedBy int DEFAULT NULL,
-CreatedDate datetime DEFAULT NULL,
-UpdatedBy int DEFAULT NULL,
-UpdatedDate datetime DEFAULT NULL,
+CREATE TABLE bakery.tbl_contact(
+id int NOT NULL AUTO_INCREMENT,
+fullName varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+email varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+message varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+cteated_by int DEFAULT NULL,
+created_date datetime DEFAULT NULL,
+updated_by int DEFAULT NULL,
+updated_date datetime DEFAULT NULL,
 Status tinyint(1) DEFAULT '1',
 PRIMARY KEY (ID)
 );
 
-CREATE TABLE bakery.tbl_ProductCategory(
-CateID int NOT NULL AUTO_INCREMENT,
-Name nvarchar(100) NOT NULL,
-Description nvarchar(100),
-Status tinyint(1) DEFAULT '1',
-ParentID int DEFAULT NULL,
-CteatedBy int DEFAULT NULL,
-CreatedDate datetime DEFAULT NULL,
-UpdatedBy int DEFAULT NULL,
-UpdatedDate datetime DEFAULT NULL,
-Seo varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-PRIMARY KEY (CateID)
+CREATE TABLE bakery.tbl_product_category(
+id int NOT NULL AUTO_INCREMENT,
+name nvarchar(100) NOT NULL,
+description nvarchar(100),
+status tinyint(1) DEFAULT '1',
+parent_id int DEFAULT NULL,
+cteated_by int DEFAULT NULL,
+created_date datetime DEFAULT NULL,
+updated_by int DEFAULT NULL,
+updated_date datetime DEFAULT NULL,
+seo varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+PRIMARY KEY (id)
 );
 
-CREATE TABLE bakery.tbl_Products(
-ProductID int NOT NULL AUTO_INCREMENT,
-Name nvarchar(100) NOT NULL,
-Price decimal(13,0) NOT NULL,
-PriceSale decimal(13,0) DEFAULT NULL,
-ShortDescription varchar(3000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-DetailDescription longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-Avatar varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-CategoryID int DEFAULT NULL,
-Status tinyint(1) DEFAULT '1',
-ParentID int DEFAULT NULL,
-CteatedBy int DEFAULT NULL,
-CreatedDate datetime DEFAULT NULL,
-UpdatedBy int DEFAULT NULL,
-UpdatedDate datetime DEFAULT NULL,
-Seo varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-IsHot tinyint(1) DEFAULT '0',
-PRIMARY KEY (`ProductID`),
-CONSTRAINT `fk_category_products` FOREIGN KEY (`CategoryID`) REFERENCES `tbl_ProductCategory` (`CateID`) ON DELETE RESTRICT
+CREATE TABLE bakery.tbl_products(
+id int NOT NULL AUTO_INCREMENT,
+name nvarchar(100) NOT NULL,
+price decimal(13,0) NOT NULL,
+price_sale decimal(13,0) DEFAULT NULL,
+short_description varchar(3000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+detail_description longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+avatar varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+category_id int DEFAULT NULL,
+status tinyint(1) DEFAULT '1',
+parent_id int DEFAULT NULL,
+cteated_by int DEFAULT NULL,
+created_date datetime DEFAULT NULL,
+updated_by int DEFAULT NULL,
+updated_date datetime DEFAULT NULL,
+seo varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+is_hot tinyint(1) DEFAULT '0',
+PRIMARY KEY (`id`),
+CONSTRAINT `fk_category_products` FOREIGN KEY (`category_id`) REFERENCES `tbl_product_category` (`cate_id`) ON DELETE RESTRICT
 );
 
-CREATE TABLE bakery.tbl_Product_Images(
-ID int NOT NULL AUTO_INCREMENT,
-Name varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-Path varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-ProductID int NOT NULL,
-Status tinyint(1) DEFAULT '1',
-ParentID int DEFAULT NULL,
-CteatedBy int DEFAULT NULL,
-CreatedDate datetime DEFAULT NULL,
-UpdatedBy int DEFAULT NULL,
-UpdatedDate datetime DEFAULT NULL,
-PRIMARY KEY (ID),
-CONSTRAINT `fk_product_images` FOREIGN KEY (`ProductID`) REFERENCES `tbl_Products` (`ProductID`)
+CREATE TABLE bakery.tbl_product_images(
+id int NOT NULL AUTO_INCREMENT,
+name varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+path varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+product_id int NOT NULL,
+status tinyint(1) DEFAULT '1',
+parent_id int DEFAULT NULL,
+cteated_by int DEFAULT NULL,
+created_date datetime DEFAULT NULL,
+updated_by int DEFAULT NULL,
+updated_date datetime DEFAULT NULL,
+PRIMARY KEY (id),
+CONSTRAINT `fk_product_images` FOREIGN KEY (`product_id`) REFERENCES `tbl_products` (`id`)
 );
 
-CREATE TABLE bakery.tbl_Saleoder(
-ID int NOT NULL AUTO_INCREMENT,
-Code varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-UserID int DEFAULT NULL,
-Total decimal(13,2) DEFAULT NULL,
-CteatedBy int DEFAULT NULL,
-CreatedDate datetime DEFAULT NULL,
-UpdatedBy int DEFAULT NULL,
-UpdatedDate datetime DEFAULT NULL,
-CustomerName varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-CustomerAddress varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-Seo varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-CustomerPhone varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-CustomerEmail varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-PRIMARY KEY (ID)
+CREATE TABLE bakery.tbl_saleoder(
+id int NOT NULL AUTO_INCREMENT,
+code varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+user_id int DEFAULT NULL,
+total decimal(13,2) DEFAULT NULL,
+cteated_by int DEFAULT NULL,
+created_date datetime DEFAULT NULL,
+updated_by int DEFAULT NULL,
+updated_date datetime DEFAULT NULL,
+customer_name varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+customer_address varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+seo varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+customer_phone varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+customer_email varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+PRIMARY KEY (id)
 );
 
-CREATE TABLE bakery.tbl_Saleoder_Product(
-ID int NOT NULL AUTO_INCREMENT,
-SaleoderID int NOT NULL,
-ProductID int NOT NULL,
-Quanlity int NOT NULL,
-CteatedBy int DEFAULT NULL,
-CreatedDate datetime DEFAULT NULL,
-UpdatedBy int DEFAULT NULL,
-UpdatedDate datetime DEFAULT NULL,
-Status tinyint(1) DEFAULT '1',
-PRIMARY KEY (`ID`),
-KEY `fk_saleorder_product_idx` (`SaleoderID`),
-KEY `fk_product_saleorder_idx` (`ProductID`),
-CONSTRAINT `fk_product_saleorder` FOREIGN KEY (`ProductID`) REFERENCES `tbl_Products` (`ProductID`) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT `fk_saleorder_product` FOREIGN KEY (`SaleoderID`) REFERENCES `tbl_Saleoder` (ID)
+CREATE TABLE bakery.tbl_saleoder_product(
+id int NOT NULL AUTO_INCREMENT,
+saleoder_id int NOT NULL,
+product_id int NOT NULL,
+quanlity int NOT NULL,
+cteated_by int DEFAULT NULL,
+created_date datetime DEFAULT NULL,
+updated_by int DEFAULT NULL,
+updated_date datetime DEFAULT NULL,
+status tinyint(1) DEFAULT '1',
+PRIMARY KEY (`id`),
+KEY `fk_saleorder_product_idx` (`saleoder_id`),
+KEY `fk_product_saleorder_idx` (`product_id`),
+CONSTRAINT `fk_product_saleorder` FOREIGN KEY (`product_id`) REFERENCES `tbl_Products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `fk_saleorder_product` FOREIGN KEY (`saleoder_id`) REFERENCES `tbl_saleoder` (id)
 );
