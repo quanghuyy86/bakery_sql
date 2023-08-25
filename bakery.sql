@@ -13,7 +13,7 @@ Status tinyint(1) DEFAULT '1',
 PRIMARY KEY (ID)
 );
 
-CREATE TABLE bakery.tbl_product_category(
+CREATE TABLE bakery.tbl_categories(
 id int NOT NULL AUTO_INCREMENT,
 name nvarchar(100) NOT NULL,
 description nvarchar(100),
@@ -45,10 +45,10 @@ updated_date datetime DEFAULT NULL,
 seo varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
 is_hot tinyint(1) DEFAULT '0',
 PRIMARY KEY (`id`),
-CONSTRAINT `fk_category_products` FOREIGN KEY (`category_id`) REFERENCES `tbl_product_category` (`cate_id`) ON DELETE RESTRICT
+CONSTRAINT `fk_categories` FOREIGN KEY (`category_id`) REFERENCES `tbl_categories` (`id`) ON DELETE RESTRICT
 );
 
-CREATE TABLE bakery.tbl_product_images(
+CREATE TABLE bakery.tbl_products_images(
 id int NOT NULL AUTO_INCREMENT,
 name varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
 path varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
@@ -60,10 +60,10 @@ created_date datetime DEFAULT NULL,
 updated_by int DEFAULT NULL,
 updated_date datetime DEFAULT NULL,
 PRIMARY KEY (id),
-CONSTRAINT `fk_product_images` FOREIGN KEY (`product_id`) REFERENCES `tbl_products` (`id`)
+CONSTRAINT `fk_products_images` FOREIGN KEY (`product_id`) REFERENCES `tbl_products` (`id`)
 );
 
-CREATE TABLE bakery.tbl_saleoder(
+CREATE TABLE bakery.tbl_saleorders(
 id int NOT NULL AUTO_INCREMENT,
 code varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
 user_id int DEFAULT NULL,
@@ -80,7 +80,7 @@ customer_email varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT N
 PRIMARY KEY (id)
 );
 
-CREATE TABLE bakery.tbl_saleoder_product(
+CREATE TABLE bakery.tbl_saleorders_products(
 id int NOT NULL AUTO_INCREMENT,
 saleoder_id int NOT NULL,
 product_id int NOT NULL,
@@ -93,6 +93,6 @@ status tinyint(1) DEFAULT '1',
 PRIMARY KEY (`id`),
 KEY `fk_saleorder_product_idx` (`saleoder_id`),
 KEY `fk_product_saleorder_idx` (`product_id`),
-CONSTRAINT `fk_product_saleorder` FOREIGN KEY (`product_id`) REFERENCES `tbl_Products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT `fk_saleorder_product` FOREIGN KEY (`saleoder_id`) REFERENCES `tbl_saleoder` (id)
+CONSTRAINT `fk_products_saleorders` FOREIGN KEY (`product_id`) REFERENCES `tbl_products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `fk_saleorders_products` FOREIGN KEY (`saleoder_id`) REFERENCES `tbl_saleorders` (id)
 );
